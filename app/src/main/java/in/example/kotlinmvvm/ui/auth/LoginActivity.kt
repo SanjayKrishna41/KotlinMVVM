@@ -2,14 +2,13 @@ package `in`.example.kotlinmvvm.ui.auth
 
 import `in`.example.kotlinmvvm.R
 import `in`.example.kotlinmvvm.databinding.ActivityLoginBinding
+import `in`.example.kotlinmvvm.ui.model.UserModel
 import `in`.example.kotlinmvvm.util.hide
 import `in`.example.kotlinmvvm.util.show
-import `in`.example.kotlinmvvm.util.toast
+import `in`.example.kotlinmvvm.util.snackBar
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -32,15 +31,13 @@ class LoginActivity : AppCompatActivity(),AuthListner {
         progress_bar.show()
     }
 
-    override fun onSuccess(loginResponse: LiveData<String>) {
-        loginResponse.observe(this, Observer {
-            progress_bar.hide()
-            toast(it)
-        })
+    override fun onSuccess(user : UserModel) {
+        root_layout.snackBar("${user.email} is Logged in")
+        progress_bar.hide()
     }
 
     override fun onSFailure(message: String) {
         progress_bar.hide()
-        toast(message)
+        root_layout.snackBar(message)
     }
 }
