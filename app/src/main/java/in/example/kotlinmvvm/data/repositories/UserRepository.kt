@@ -17,6 +17,12 @@ class UserRepository(
         }
     }
 
+    suspend fun userSignUp(user: UserModel) : SingleResponse<UserModel>{
+        return apiRequest {
+            api.userSignUp(user)
+        }
+    }
+
     suspend fun saveUser(user: UserModel) = db.getUserDao().insert(user)
 
     fun getUser() = db.getUserDao().getUser()
