@@ -17,7 +17,14 @@ interface ApiService {
 
 
     companion object{
-        operator fun invoke() : ApiService{
+        operator fun invoke(
+
+        ) : ApiService{
+            // create okhttp client for network connection
+//            val okHttpClient = OkHttpClient.Builder()
+//                .addInterceptor(networkConnectionInterceptor)
+//                .build()
+
             return Retrofit.Builder()
                 .baseUrl("http://103.86.177.104:8100/bysos/")
                 .addConverterFactory(GsonConverterFactory.create())
