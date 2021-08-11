@@ -2,6 +2,7 @@ package `in`.example.kotlinmvvm.data.network
 
 import `in`.example.kotlinmvvm.ui.model.SingleResponse
 import `in`.example.kotlinmvvm.ui.model.UserModel
+import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,17 +16,22 @@ interface ApiService {
         @Body params : UserModel
     ) : Response<SingleResponse<UserModel>>
 
+    @POST("user/emaillogin")
+    suspend fun userSignUp(
+        @Body params : UserModel
+    ) : Response<SingleResponse<UserModel>>
 
     companion object{
         operator fun invoke(
-
+            networkConnectionInterceptor : NetworkConnectionInterceptor
         ) : ApiService{
             // create okhttp client for network connection
-//            val okHttpClient = OkHttpClient.Builder()
-//                .addInterceptor(networkConnectionInterceptor)
-//                .build()
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
 
             return Retrofit.Builder()
+                .client(okHttpClient)
                 .baseUrl("http://103.86.177.104:8100/bysos/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

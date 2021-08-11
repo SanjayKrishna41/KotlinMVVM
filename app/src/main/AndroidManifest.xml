@@ -8,6 +8,7 @@
 
     <application
         android:allowBackup="true"
+        android:name=".DataBindingApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -15,7 +16,7 @@
         android:theme="@style/Theme.KotlinMVVM"
         android:usesCleartextTraffic="true"
         tools:ignore="UnusedAttribute">
-        <activity android:name=".ui.home.HomeActivity"></activity>
+        <activity android:name=".ui.home.HomeActivity" />
         <activity android:name=".ui.auth.SignupActivity" />
         <activity android:name=".ui.auth.LoginActivity">
             <intent-filter>
