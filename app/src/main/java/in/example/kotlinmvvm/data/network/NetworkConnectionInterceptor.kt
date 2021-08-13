@@ -28,6 +28,5 @@ class NetworkConnectionInterceptor(
         connectivityManager.activeNetworkInfo.also {
             return it != null && it.isConnected
         }
-
     }
 }

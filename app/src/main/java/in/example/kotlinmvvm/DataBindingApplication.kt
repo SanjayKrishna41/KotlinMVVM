@@ -3,8 +3,11 @@ package `in`.example.kotlinmvvm
 import `in`.example.kotlinmvvm.data.db.AppDataBase
 import `in`.example.kotlinmvvm.data.network.ApiService
 import `in`.example.kotlinmvvm.data.network.NetworkConnectionInterceptor
+import `in`.example.kotlinmvvm.data.repositories.ContestRepository
 import `in`.example.kotlinmvvm.data.repositories.UserRepository
 import `in`.example.kotlinmvvm.ui.auth.AuthViewModelFactory
+import `in`.example.kotlinmvvm.ui.home.contest.ContestViewModelFactory
+import `in`.example.kotlinmvvm.ui.home.profile.ProfileViewModelFactory
 import android.app.Application
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -23,6 +26,9 @@ class DataBindingApplication : Application(), KodeinAware {
         bind() from singleton { ApiService(instance()) }
         bind() from singleton { AppDataBase(instance()) }
         bind() from singleton { UserRepository(instance(),instance()) }
+        bind() from singleton { ContestRepository(instance()) }
         bind() from provider  { AuthViewModelFactory(instance()) }
+        bind() from provider  { ProfileViewModelFactory(instance()) }
+        bind() from provider  { ContestViewModelFactory(instance()) }
     }
 }
